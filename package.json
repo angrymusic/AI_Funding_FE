@@ -1,6 +1,7 @@
 {
   "name": "tobi",
   "version": "0.1.0",
+  "homepage": "https://ai-funding.github.io/AI_Funding_FE",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
@@ -30,6 +31,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "postbuild": "copy build\\index.html build\\404.html",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
