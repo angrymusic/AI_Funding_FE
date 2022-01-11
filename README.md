@@ -12,6 +12,10 @@ build후 'GithubPage-관리-브랜치'에 모든 변경사항을 push 한 다음
 git subtree push --prefix build/ origin gh-pages
 ```
 
+## TODO
+
+react-router 사용 시 App을 감싸는 라우터 컴포넌트에 baseurl속성을 설정해야 합니다.
+
 ## build시 주의할 점
 
 build 명령 수행 시 package.json에 빌드가 끝난후 실행되는 코드에 'copy build/index.html build/404.html'이라는 명령어가 있습니다. 이 명령어는 윈도우 환경(cmd)에서만 동작하는 명령어로 다른 os에서 build하시는 분들은 직접 build폴더 내에 index.html과 내용이 똑같은 404.html파일을 만들어주시면 됩니다.
