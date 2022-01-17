@@ -8,7 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter basename={"https://ai-funding.github.io/AI_Funding_FE"}>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <GlobalStyle />
       <App />
     </BrowserRouter>
