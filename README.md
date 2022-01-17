@@ -6,9 +6,13 @@
 
 따라서 접속하실때 시크릿 창으로 접속해주시면 serviceworker가 동작을 안하기 때문에 최신 페이지를 확인하실 수 있습니다.
 
+시크릿 창을 사용하지 않는 경우는 개발자 도구의 application탭을 이용해서 캐시를 직접 지우시면 됩니다. (Clear site data클릭)
+
+![](https://i.imgur.com/jkGHUeX.png)
+
 ## 현재 이슈
 
-- 접속시 홈 컴포넌트가 뜨지 않음 -> react router dom설정 문제...
+- 접속시 홈 컴포넌트가 뜨지 않음 -> react router dom설정 문제... => 해결됨
 
 ## GithubPages 관리 브랜치
 
