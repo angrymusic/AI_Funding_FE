@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import GoogleLoginButton from "./GoogleLoginButton";
-import KakaoLoginButton from "./KakaoLoginButton";
-import GoogleLoginBtn from "../container/google-login";
-import Logo from "./Logo";
+import styled from 'styled-components';
+import GoogleLoginButton from './GoogleLoginButton';
+import KakaoLoginButton from './KakaoLoginButton';
+import GoogleLoginBtn from '../container/google-login';
+import Logo from './Logo';
 
 export default function Login() {
   return (

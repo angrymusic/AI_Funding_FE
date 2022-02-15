@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import kakao_img from "../../../image/kakao_login_large_narrow.png";
+import styled from 'styled-components';
+import kakao_img from '../../../image/kakao_login_large_narrow.png';
 
 export default function KakaoLoginButton({ className, login }) {
   return (
@@ -8,7 +8,7 @@ export default function KakaoLoginButton({ className, login }) {
       onClick={
         login ||
         (() => {
-          alert("로그인 함수를 넣어주세요.");
+          alert('로그인 함수를 넣어주세요.');
         })
       }
     ></KakaoButton>

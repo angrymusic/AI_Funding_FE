@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
 
     * {
         box-sizing: border-box;
+				color: white;	
     }
 
     p {
@@ -31,6 +32,20 @@ const GlobalStyle = createGlobalStyle`
         width:100%;
         height: 100%;
     }
+
+	.swiper-pagination-bullet-custom {
+		background-color: #616060;
+		width: 40px;
+		height: 2.5px;
+		opacity: 1;
+		border-radius:0px;
+	}
+	.swiper-pagination-bullet {
+		background-color: #616060;
+	}
+	.swiper-pagination-bullet-active {
+		background-color: white;
+	}
 `;
 
 export default GlobalStyle;

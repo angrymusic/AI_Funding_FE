@@ -4,31 +4,30 @@ const SIGN_IN = 'login/SING_IN';
 const SIGN_OUT = 'login/SIGN_OUT';
 
 /* Action Creators */
-export const autoSignIn = () => ({
+export const autoSignIn = (accessToken) => ({
   type: AUTO_SIGN_IN,
   isLoggedIn: true,
-  hasRefresh: true,
+  accessToken,
 });
 
-export const signIn = () => ({
+export const signIn = (accessToken) => ({
   type: SIGN_IN,
   isLoggedIn: true,
-  hasRefresh: true,
-  accessToken: null,
+  accessToken,
 });
 
 export const signOut = () => ({
   type: SIGN_OUT,
   isLoggedIn: false,
-  hasRefresh: true,
   accessToken: null,
 });
 
 /* Initial state */
 const initialState = {
   isLoggedIn: false,
-  hasRefresh: false,
   accessToken: null,
+  uid: null,
+  loginType: null,
 };
 
 /* Reducer */
@@ -38,19 +37,17 @@ export default function login(state = initialState, action) {
       return {
         ...state,
         isLoggedIn: action.isLoggedIn,
-        hasRefresh: action.hasRefresh,
       };
     case AUTO_SIGN_IN:
       return {
         ...state,
+        accessToken: action.accessToken,
         isLoggedIn: action.isLoggedIn,
-        hasRefresh: action.hasRefresh,
       };
     case SIGN_OUT:
       return {
         ...state,
         isLoggedIn: action.isLoggedIn,
-        hasRefresh: action.hasRefresh,
       };
     default:
       return state;
