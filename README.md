@@ -1,83 +1,39 @@
-# 💰 AI_Funding_FE
+## 깃헙페이지 접속시 주의할 점!!
 
-AI투자 어플, '투비'의 프론트엔드 팀입니다.
+해당 페이지는 serviceworker(pwa 관련 api)때문에 자동으로 리소스를 캐시에 저장합니다.
 
-## 🧰 기술 스택
+문제는 이 캐시가 일반적인 캐시가 아니라서 브라우저에서 쉽게 지우기 힘듭니다.
 
-| 분류       | 이름        | 버전   |
-| ---------- | ----------- | ------ |
-| 개발환경   | Node.js     | 16.xx  |
-| 프레임워크 | React.js    | 17.0.2 |
-| 버전 관리  | git, github |        |
+따라서 접속하실때 시크릿 창으로 접속해주시면 serviceworker가 동작을 안하기 때문에 최신 페이지를 확인하실 수 있습니다.
 
-## 📚 모듈
+시크릿 창을 사용하지 않는 경우는 개발자 도구의 application탭을 이용해서 캐시를 직접 지우시면 됩니다. (Clear site data클릭)
 
-| 이름               | 버전   | 설명                                             |
-| ------------------ | ------ | ------------------------------------------------ |
-| react-router-dom   | 6.2.1  | 리액트 컴포넌트 전환을 돕는 패키지               |
-| redux              | 4.1.2  | 상태값을 하나의 store에서 관리하도록 하는 패키지 |
-| react-redux        | 7.2.6  | redux의 react최적화 버전                         |
-| styled-components  | 5.3.3  | 컴포넌트단위의 스타일링을 돕는 패키지            |
-| workbox            | 5.1.4  | pwa관리를 도와주는 패키지                        |
-| axios              | 0.25.0 | http통신을 도와주는 패키지                       |
-| fortawesome        | 0.1.16 | fontawesome 아이콘 패키지                        |
-| react-google-login | 5.2.2  | 구글 로그인 패키지                               |
-| swiper | 8.0.3  | 화면 슬라이드 구현                            |
-| chart.js | 3.7.0  | 차트 구현                            |
+![](https://i.imgur.com/jkGHUeX.png)
 
-## 🌏 환경 설정
+## 현재 이슈
 
-https://nodejs.org/en/  
-위 링크에서 node.js 16.xx버전으로 설치.
+- 접속시 홈 컴포넌트가 뜨지 않음 -> react router dom설정 문제... => 해결됨
 
-git clone후 폴더 내에서 npm install 실행
+## GithubPages 관리 브랜치
+
+github pages 관리 브랜치입니다.
+
+'gh-pages'브랜치는 직접적으로 수정하시면 안되고 이 브랜치를 통해서 관리하는것이 좋습니다.
+
+'gh-pages'브랜치에 업데이트 사항을 적용하려면 develop브랜치에서 pull을 한 다음 build를 수행해야 합니다.
+
+build후 'GithubPage-관리-브랜치'에 모든 변경사항을 push 한 다음 git subtree 명령어로 gh-pages에 build 폴더 만을 push해줍니다.
 
 ```
-git clone https://github.com/AI-Funding/AI_Funding_FE.git
+git subtree push --prefix build/ origin gh-pages
 ```
 
-```
-cd AI_Funding_FE
-```
+## TODO
 
-```
-npm install
-```
+react-router 사용 시 App을 감싸는 라우터 컴포넌트에 baseurl속성을 설정해야 합니다.
 
-npm install시 나타나는 vulnerabilities 경고는 무시해도 됩니다.  
-(npm 관련 문제라 프로젝트에 영향 x)
+## build시 주의할 점
 
-## 🚧 리액트 설계 디자인
+build 명령 수행 시 package.json에 빌드가 끝난후 실행되는 코드에 'copy build/index.html build/404.html'이라는 명령어가 있습니다. 이 명령어는 윈도우 환경(cmd)에서만 동작하는 명령어로 다른 os에서 build하시는 분들은 직접 build폴더 내에 index.html과 내용이 똑같은 404.html파일을 만들어주시면 됩니다.
 
-https://velog.io/@blackb0x/리액트-디자인패턴  
-https://www.stevy.dev/react-design-guide
-
-presentational/container 패턴을 중심으로 개발
-
-## 📝 UX/UI Writing
-
-리디북스  
-https://ridi.design/writings/
-
-강남언니  
-https://blog.gangnamunni.com/post/ui-text-guideline/
-
-신한카드(pdf)
-https://drive.google.com/file/d/1Ku6Q9uw2ZUwgizBf3nnj2ZyvP2nYc9QZ/view?usp=sharing
-
-## PWA 테스트를 하는 경우
-
-https://create-react-app.dev/docs/making-a-progressive-web-app/
-
-현재 프로젝트 설정은 build 버전의 경우에만 service worker가 작동하도록 되어있습니다.  
-만약 PWA테스트를 하시는 경우 build 명령어를 실행 후 build 서버를 이용해 테스트해 주시면 됩니다.
-
-```
-npm run build
-serve -s build
-```
-
-service worker는 https에서만 작동하지만 예외적으로 localhost에서도 동작합니다.  
-또한 캐시 기능 때문에 시크릿창에서 테스트를 하셔야 편리합니다.
-만약 스마트폰에서 동작을 확인하고 싶으면 ngrok을 이용해 임시 https주소를 만들면 편리합니다.  
-현재 pwa기능은 캐싱 기능 밖에 없기 때문에 push알람과 업데이트 같은 기능은 직접 구현해야 합니다.
+404.html파일을 만드는 이유는 github pages가 존재하지 않는 url을 참조할 시 자동으로 404.html로 redirect해줍니다. 하지만 저희 앱은 Single page application이기 때문에 url이 바뀌어도 화면은 그대로여야 합니다. 따라서 index.html과 같은 내용의 404.html을 만들어줘야 합니다.
