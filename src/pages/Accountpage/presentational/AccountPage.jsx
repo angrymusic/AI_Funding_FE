@@ -43,7 +43,7 @@ const StyledTabs = styled.div`
   display: flex;
   width: 100%;
   height: 60px;
-  background: black;
+  background: rgb(32, 32, 32);
 `;
 
 const StyledTab = styled.div`

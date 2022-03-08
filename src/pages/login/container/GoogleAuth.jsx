@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { signIn } from '../../../modules/login';
 import { setItem } from '../../../utils/cookies';
 
-export default function KakaoAuth() {
+export default function GoogleAuth() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ export default function KakaoAuth() {
       axios
         .post('http://ec2-13-209-73-79.ap-northeast-2.compute.amazonaws.com:8080/auth/callback', {
           code,
-          loginType: 'KAKAO',
+          loginType: 'GOOGLE',
         })
         .then((response) => {
           console.log(response);
@@ -40,6 +40,5 @@ export default function KakaoAuth() {
       navigate('/', { replace: true });
     }
   }, [dispatch, navigate]);
-
   return <div style={{ margin: '50%', color: 'white' }}>{'로그인 중입니다...'}</div>;
 }

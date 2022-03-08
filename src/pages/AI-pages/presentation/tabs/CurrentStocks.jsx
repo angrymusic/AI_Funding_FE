@@ -17,22 +17,31 @@ const InfoAnimation = keyframes`
 export default function CurrentStock() {
   const [account, setAccount] = useState([]);
   const [stocks, setStocks] = useState([]);
-
-  const [DetailInfo, ShowDetail] = useState('none');
+  const [selectedAccount, setSelectedAccount] = useState(0);
+  const [detailInfo, setDetailInfo] = useState([]);
+  const [detailName, setDetailName] = useState("none");
   useEffect(() => {
     axios
-      .post('http://localhost:8000/', {
-        customer_info_id: '1',
+      .post('http://localhost:8060/', {
+        customer_info_id: 1,
         login_type: '00',
       })
       .then((res) => {
-        //res로 백에서 데이터 정보가 넘어옴?
+        //res로 백에서 데이터 정보가 넘어옴
         setAccount(res.data.account);
-        setStocks(res.data.account[0]);
+        setStocks(res.data.account[selectedAccount].stock);
+        console.log("Change Account")
+      })
+      .catch((err) => {
+        console.log('AIpage_currentstock_axios_err');
       });
-  }, []);
+  }, [selectedAccount]);
   const holdingStocks = stocks.map((stock, index) => (
-    <div key={index} onClick={() => ShowDetail(stock.stockName)}>
+    <div key={index} onClick={() => {
+      setDetailName(stock.stockName);
+      setDetailInfo(stock.stockDetail);
+    }
+      }>
       <StockInfo
         stockName={stock.stockName}
         currentPrice={stock.currentPrice}
@@ -42,41 +51,36 @@ export default function CurrentStock() {
       />
     </div>
   ));
+  let accountSelector;
+  function setAccountSelector() {
+    let accountSelector = [];
+    for (let i = 0; i < account.length; i++) {
+      accountSelector.push(
+        <option key={i} value={i}>
+          {account[i].accountName}
+        </option>
+      );
+    }
+    return accountSelector;
+  }
+  accountSelector = setAccountSelector();
+
+  const selectingAccount = (e) => {
+    setSelectedAccount(e.target.value);
+  };
   return (
     <StyledScrollArea className="container">
+      <StyledSelectBox className="accountSelector">
+        <StyledSelect onChange={selectingAccount} value={selectedAccount}>
+          {accountSelector}
+        </StyledSelect>
+      </StyledSelectBox>
       {holdingStocks}
-      <div onClick={() => ShowDetail('카카오')}>
-        <StockInfo
-          stockName="카카오"
-          currentPrice="112,500"
-          stockPriceChange="1,500"
-          stockRateChange="-1.32%"
-          stockChange="down"
-        />
-      </div>
-      <div onClick={() => ShowDetail('삼성전자')}>
-        <StockInfo
-          stockName="삼성전자"
-          currentPrice="80,200"
-          stockPriceChange="7,000"
-          stockRateChange="+9.28%"
-          stockChange="up"
-        />
-      </div>
-      <div onClick={() => ShowDetail('광운대')}>
-        <StockInfo
-          stockName="광운대"
-          currentPrice="40,200"
-          stockPriceChange="0"
-          stockRateChange="=0.00%"
-          stockChange="none"
-        />
-      </div>
-      <StyledDetailInfo className={DetailInfo === 'none' ? 'CloseInfo' : 'OpenInfo'}>
-        <StyledBackButton onClick={() => ShowDetail('none')}>◀ 이전</StyledBackButton>
+      <StyledDetailInfo className={detailName === 'none' ? 'CloseInfo' : 'OpenInfo'}>
+        <StyledBackButton onClick={() => setDetailName('none')}>◀ 이전</StyledBackButton>
         <StyledStackGraph className="graph">
-          {DetailInfo}
-          <LineChart />
+          {detailName}
+          <LineChart stockDetail={detailInfo}/>
         </StyledStackGraph>
       </StyledDetailInfo>
     </StyledScrollArea>
@@ -97,6 +101,18 @@ const StyledDetailInfo = styled.div`
       : `display: block;
       `;
   }};
+`;
+const StyledSelectBox = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+const StyledSelect = styled.select`
+
+  background: none;
+  color: white;
+  border: none;
+  font-size: 20px;
+  margin: 10px 10px 0px 10px;
 `;
 
 const StyledBackButton = styled.div`

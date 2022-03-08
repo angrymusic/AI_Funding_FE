@@ -22,13 +22,15 @@ export default function StockInfo({
     <StyledStuckInfo className="StuckInfo">
       <StyledstockName className="stockName">{stockName}</StyledstockName>
       <StyledColor style={color}>
-        <StyledCurrentPrice className="CurrentPrice">{currentPrice}</StyledCurrentPrice>
+        <StyledCurrentPrice className="CurrentPrice">{currentPrice.toString()
+  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</StyledCurrentPrice>
 
         <StyledFluc className="RateFluc">
-          <StyledRateFluc>{stockRateChange}</StyledRateFluc>
+          <StyledRateFluc>{stockRateChange}%</StyledRateFluc>
           <StyledPriceFluc className="">
             {tri}
-            {stockPriceChange}
+            {stockPriceChange.toString()
+  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
           </StyledPriceFluc>
         </StyledFluc>
         <StyledPriceFluc className="PriceFluc"></StyledPriceFluc>
