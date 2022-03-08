@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import KakaoLoginButton from '../presentational/KakaoLoginButton';
 import GoogleLoginBtn from './GoogleLoginButton';
 import Logo from '../presentational/Logo';
-import { authorizeKakao, initializeKakao } from './kakao';
 import { useDispatch } from 'react-redux';
 import { autoSignIn, signIn } from '../../../modules/login';
 import { useEffect } from 'react';
+import { initializeKakao, authorizeKakao } from './kakao';
 
 export default function Login() {
   const dispatch = useDispatch();

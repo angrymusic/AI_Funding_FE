@@ -12,7 +12,7 @@ const obj = {
 export default function AccountPage() {
   const [SelectedTab, SelectTab] = useState(0);
   return (
-    <StyledAccountPage className="ai-page-container">
+    <StyledAccountPage className="account_page">
       <StyledTabs className="tabs">
         <StyledTab>
           <StyledTabButton

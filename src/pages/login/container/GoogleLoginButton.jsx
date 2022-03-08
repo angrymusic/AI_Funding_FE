@@ -43,7 +43,7 @@ export default function GoogleLoginBtn({ className, onGoogleLogin }) {
     onSuccess,
     onFailure,
     clientId,
-    isSignedIn: true,
+    isSignedIn: false,
     accessType: 'offline',
     responseType: 'code',
     // prompt: 'consent',

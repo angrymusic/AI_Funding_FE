@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 // 레이아웃 컴포넌트
 export default function BackgroundLayout({ className, children }) {

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import IntroAi from './tabs/IntroAi';
-import CurrentStuck from './tabs/CurrentStuck';
+import CurrentStock from './tabs/CurrentStocks';
 import TransHistory from './tabs/TransHistory';
 
 const obj = {
   0: <IntroAi />,
-  1: <CurrentStuck />,
+  1: <CurrentStock />,
   2: <TransHistory />,
 };
 
@@ -45,7 +45,6 @@ export default function AiPages() {
     </StyledAiPages>
   );
 }
-
 const StyledAiPages = styled.div`
   height: 100%;
 `;

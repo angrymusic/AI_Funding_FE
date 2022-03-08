@@ -11,15 +11,7 @@ import {
   Legend,
 } from 'chart.js';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 const data = {
   datasets: [
     {
@@ -73,7 +65,7 @@ const Chart = () => {
 export default Chart;
 
 const StyledChart = styled.div`
-  margin-top: 10px;
+  margin: 10px auto;
   width: 80vw;
   max-width: 900px;
 `;
