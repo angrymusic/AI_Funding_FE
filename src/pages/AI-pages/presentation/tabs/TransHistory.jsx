@@ -1,94 +1,70 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import TradeRecord from '../components/TradeRecord';
 
 export default function TransHistory() {
-  const [SelectedTerm, SelectTerm] = useState(0);
+  const [selectedTerm, selectTerm] = useState(0);
+  const [selectedAccount, setSelectedAccount] = useState(0);
+  const [account, setAccount] = useState([]);
+  const [tradeHistory, setTradeHistory] = useState([]);
+  useEffect(() => {
+    axios
+      .post('http://localhost:8070/', {
+        customer_info_id: 1,
+        login_type: '00',
+      })
+      .then((res) => {
+        //res로 백에서 데이터 정보가 넘어옴
+        setAccount(res.data.account);
+        setTradeHistory(res.data.account[selectedAccount].tradeHistory);
+        console.log("Change Account")
+      })
+      .catch((err) => {
+        console.log('AIpage_transhistory_axios_err');
+      });
+  }, [selectedAccount]);
+
+  const holdingRecords = tradeHistory.map((history, index) => (
+    <div key={index}>
+      <TradeRecord
+        stockName={history.stockName}
+        tradeDate={history.tradeDate}
+        totalPrice={history.totalPrice}
+        tradeType={history.tradeType}
+        tradeAmount={history.tradeAmount}
+        unitPrice={history.unitPrice}
+        tradePrice={history.tradePrice}
+      />
+    </div>
+  ));
+
+  let accountSelctor;
+  function setAccountSelector() {
+    let accountSelector = [];
+    for (let i = 0; i < account.length; i++) {
+      accountSelector.push(
+        <option key={i} value={i}>
+          {account[i].accountName}
+        </option>
+      );
+    }
+    return accountSelector;
+  }
+  accountSelctor = setAccountSelector();
+
+  const selectingAccount = (e) => {
+    setSelectedAccount(e.target.value);
+  };
   return (
     <StyledHistoryContainer className="HistoryContainer">
-      <StyledTermSelector className="SelectTerm">
-        <StyledTermButton
-          className={SelectedTerm === 0 ? 'selected' : 'notselected'}
-          onClick={() => SelectTerm(0)}
-        >
-          ALL
-        </StyledTermButton>
-        <StyledBar>|</StyledBar>
-        <StyledTermButton
-          className={SelectedTerm === 1 ? 'selected' : 'notselected'}
-          onClick={() => SelectTerm(1)}
-        >
-          1M
-        </StyledTermButton>
-        <StyledBar>|</StyledBar>
-        <StyledTermButton
-          className={SelectedTerm === 3 ? 'selected' : 'notselected'}
-          onClick={() => SelectTerm(3)}
-        >
-          3M
-        </StyledTermButton>
-        <StyledBar>|</StyledBar>
-        <StyledTermButton
-          className={SelectedTerm === 6 ? 'selected' : 'notselected'}
-          onClick={() => SelectTerm(6)}
-        >
-          6M
-        </StyledTermButton>
-      </StyledTermSelector>
+      <StyledSelectBox className="accountSelector">
+        <StyledSelect onChange={selectingAccount} value={selectedAccount}>
+          {accountSelctor}
+        </StyledSelect>
+      </StyledSelectBox>
       <StyledScrollArea className="container">
-        <StyledHistories className="Histories">
-          <StyledDetails>
-            <summary>
-              <div style={{ fontSize: '1.4rem', fontWeight: 700 }}>
-                종목 이름
-              </div>
-              <div
-                style={{ fontSize: '0.8rem', fontWeight: 300, color: 'gray' }}
-              >
-                거래 날짜
-              </div>
-            </summary>
-            <StyledDetailsContainer>
-              <StyledDetailsContent>
-                거래종류 : 주식 매도 / 주식 매수
-                <br />
-                거래수량 : 00
-                <br />
-                단가 : 000,000원
-                <br />
-                매수가 : 000,000원
-              </StyledDetailsContent>
-            </StyledDetailsContainer>
-          </StyledDetails>
-          <StyledDetails>
-            <summary>
-              <div style={{ fontSize: '1.4rem', fontWeight: 700 }}>
-                종목 이름
-              </div>
-              <div
-                style={{ fontSize: '0.8rem', fontWeight: 300, color: 'gray' }}
-              >
-                거래 날짜
-              </div>
-            </summary>
-            <StyledDetailsContainer>
-              <StyledDetailsContent>
-                거래종류 : 주식 매도 / 주식 매수
-                <br />
-                거래수량 : 00
-                <br />
-                단가 : 000,000원
-                <br />
-                매수가 : 000,000원
-              </StyledDetailsContent>
-            </StyledDetailsContainer>
-          </StyledDetails>
-        </StyledHistories>
-        <div
-          className="scrollareacheck"
-          style={{ background: 'red', height: '600px', marginTop: '5px' }}
-        >
-          SCROLL_AREA_CHECK
-        </div>
+        {holdingRecords}
       </StyledScrollArea>
     </StyledHistoryContainer>
   );
@@ -103,9 +79,15 @@ const StyledHistoryContainer = styled.div`
   height: 85vh;
   margin: 10px;
 `;
+
 const StyledTermSelector = styled.div`
   margin: auto;
 `;
+
+const StyledType = styled.strong`
+  color: red;
+`;
+
 const StyledTermButton = styled.span`
   font-weight: bold;
   margin: 0 8px;
@@ -115,6 +97,17 @@ const StyledTermButton = styled.span`
       ? `color: rgb(184, 168, 142)`
       : `color: rgb(119, 119, 119)`;
   }};
+`;
+const StyledSelectBox = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+const StyledSelect = styled.select`
+  background: none;
+  color: white;
+  border: none;
+  font-size: 20px;
+  margin: 10px 10px 0px 10px;
 `;
 
 const StyledBar = styled.span`
@@ -138,8 +131,16 @@ const StyledDetails = styled.details`
   & > summary::marker {
     display: none;
   }
+  transition: height 0.2s ease;
+  overflow: hidden;
+  &:not([open]) {
+    height: 5em;
+  }
+  &[open] {
+    height: 10.5em;
+  }
   &[open] > summary {
-    border-bottom: 2px dashed rgb(184, 168, 142);
+    border-bottom: 2px dashed rgb(119, 119, 119);
   }
 `;
 
@@ -148,6 +149,7 @@ const StyledDetailsContent = styled.div`
   margin: auto;
   text-align: center;
   font-size: 16px;
+  animation: details-show 200ms ease-in-out;
 `;
 const StyledDetailsContainer = styled.div`
   margin-top: 10px;

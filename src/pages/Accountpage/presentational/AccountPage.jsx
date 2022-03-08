@@ -12,7 +12,7 @@ const obj = {
 export default function AccountPage() {
   const [SelectedTab, SelectTab] = useState(0);
   return (
-    <StyledAccountPage className="ai-page-container">
+    <StyledAccountPage className="account_page">
       <StyledTabs className="tabs">
         <StyledTab>
           <StyledTabButton
@@ -43,7 +43,7 @@ const StyledTabs = styled.div`
   display: flex;
   width: 100%;
   height: 60px;
-  background: black;
+  background: rgb(32, 32, 32);
 `;
 
 const StyledTab = styled.div`

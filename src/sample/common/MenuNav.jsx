@@ -1,61 +1,41 @@
-import React, { useState } from "react";
-import "./FontAwesome";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import './FontAwesome';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styled from 'styled-components';
 
 const MenuNav = () => {
   const [selected, select] = useState(1);
   return (
     <StyledMenubar className="Menu_bar">
-      <StyledMenuButton
-        to="/"
-        className="Menu_button"
-        onClick={() => select(1)}
-      >
+      <StyledMenuButton to="/" className="Menu_button" onClick={() => select(1)}>
         <StyledIcon
           icon="fa-solid fa-house"
-          className={selected === 1 ? "selected" : "notselected"}
+          className={selected === 1 ? 'selected' : 'notselected'}
         />
       </StyledMenuButton>
-      <StyledMenuButton
-        to="/second"
-        className="Menu_button"
-        onClick={() => select(2)}
-      >
+      <StyledMenuButton to="/second" className="Menu_button" onClick={() => select(2)}>
         <StyledIcon
           icon="fa-solid fa-comments"
-          className={selected === 2 ? "selected" : "notselected"}
+          className={selected === 2 ? 'selected' : 'notselected'}
         />
       </StyledMenuButton>
-      <StyledMenuButton
-        to="/third"
-        className="Menu_button"
-        onClick={() => select(3)}
-      >
+      <StyledMenuButton to="/third" className="Menu_button" onClick={() => select(3)}>
         <StyledIcon
           icon="fa-solid fa-gear"
-          className={selected === 3 ? "selected" : "notselected"}
+          className={selected === 3 ? 'selected' : 'notselected'}
         />
       </StyledMenuButton>
-      <StyledMenuButton
-        to="/fourth"
-        className="Menu_button"
-        onClick={() => select(4)}
-      >
+      <StyledMenuButton to="/fourth" className="Menu_button" onClick={() => select(4)}>
         <StyledIcon
           icon="fa-solid fa-comments"
-          className={selected === 4 ? "selected" : "notselected"}
+          className={selected === 4 ? 'selected' : 'notselected'}
         />
       </StyledMenuButton>
-      <StyledMenuButton
-        to="/fifth"
-        className="Menu_button"
-        onClick={() => select(5)}
-      >
+      <StyledMenuButton to="/fifth" className="Menu_button" onClick={() => select(5)}>
         <StyledIcon
           icon="fa-solid fa-gear"
-          className={selected === 5 ? "selected" : "notselected"}
+          className={selected === 5 ? 'selected' : 'notselected'}
         />
       </StyledMenuButton>
     </StyledMenubar>
@@ -87,7 +67,7 @@ const StyledMenuButton = styled(Link)`
 
 const StyledIcon = styled(FontAwesomeIcon)`
   ${(props) => {
-    return props.className === "selected"
+    return props.className === 'selected'
       ? `color: rgb(184, 168, 142)`
       : `color: rgb(119, 119, 119)`;
   }};

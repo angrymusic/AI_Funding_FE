@@ -22,6 +22,8 @@ AI투자 어플, '투비'의 프론트엔드 팀입니다.
 | axios              | 0.25.0 | http통신을 도와주는 패키지                       |
 | fortawesome        | 0.1.16 | fontawesome 아이콘 패키지                        |
 | react-google-login | 5.2.2  | 구글 로그인 패키지                               |
+| swiper | 8.0.3  | 화면 슬라이드 구현                            |
+| chart.js | 3.7.0  | 차트 구현                            |
 
 ## 🌏 환경 설정
 

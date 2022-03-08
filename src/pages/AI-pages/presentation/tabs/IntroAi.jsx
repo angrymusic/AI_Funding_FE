@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import SwiperCore, { EffectCoverflow, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-// import 'swiper/swiper-bundle.min.css';
-// import 'swiper/swiper.min.css';
 import Intro1 from './AI-intros/intro1';
 import Intro2 from './AI-intros/intro2';
 
@@ -11,7 +9,7 @@ SwiperCore.use([EffectCoverflow, Pagination]);
 
 const App = () => {
   return (
-    <StyledScrollArea className="ScrollArea">
+    <StyledScrollArea>
       <StyledContainer className="Container">
         <StyledSwiper
           grabCursor={true}
@@ -26,28 +24,22 @@ const App = () => {
           className="mySwiper"
         >
           <SwiperSlide>
-            <div className="intro1">
+            <StyledSwiperContent className="intro1">
               <Intro1 />
               page 1
-            </div>
+            </StyledSwiperContent>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="intro2">
+            <StyledSwiperContent className="intro2">
               <Intro2 />
               page 2
-            </div>
+            </StyledSwiperContent>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="intro3">page 3</div>
+            <StyledSwiperContent className="intro3">page 3</StyledSwiperContent>
           </SwiperSlide>
         </StyledSwiper>
       </StyledContainer>
-      <div
-        className="scrollareacheck"
-        style={{ background: 'red', height: '300px', marginTop: '5px' }}
-      >
-        SCROLL_AREA_CHECK
-      </div>
     </StyledScrollArea>
   );
 };
@@ -69,4 +61,8 @@ const StyledSwiper = styled(Swiper)`
 const StyledScrollArea = styled.div`
   overflow: scroll;
   height: 85vh;
+`;
+
+const StyledSwiperContent = styled.div`
+  margin-top: 10px;
 `;

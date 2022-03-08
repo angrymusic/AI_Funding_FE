@@ -1,98 +1,91 @@
-import styled from "styled-components";
-import { useState } from 'react';
+import React from 'react';
+import styled from 'styled-components';
+import SwiperCore, { EffectCoverflow, Pagination } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import Account1 from './Account1';
+import Account2 from './Account2';
+import Account3 from './Account3';
+
+SwiperCore.use([EffectCoverflow, Pagination]);
 
 export default function CheckProfit() {
-  const [SelectUnit, SelectPercent] = useState(0);
   return (
-      <StyledCompareProfit>
-        <StyledTop>
-          <StyledMoney>
-            <div style={{ fontSize: '2rem', fontWeight: 700, color: "white" }}>
-                10,000,000원
-              </div>
-          </StyledMoney>
-
-
-          <StyledTotalProfit>
-          <StyledUnitButton
-            className={SelectUnit === 0 ? 'Unit' : 'Percent'}
-            onClick={() => SelectPercent(0)}
-          >
-            <div style={{ fontSize: '18px', fontWeight: 700, color: "white" }}>
-              총 손익금 : 10,000,000원
+    <StyledLogContainer>
+    <StyledScrollArea>
+    <StyledCheck>
+      <StyledTop className="Top">
+        <StyledSwiper
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView={'auto'}
+          pagination={{
+            clickable: true,
+            type: 'bullets',
+            bulletActiveClass: 'swiper-pagination-bullet-active',
+            bulletClass: 'swiper-pagination-bullet-custom swiper-pagination-bullet',
+          }}
+          className="mySwiper"
+        >
+          <SwiperSlide>
+            <div className="Account1">
+              <Account1 />
             </div>
-            </StyledUnitButton>
-
-            <StyledUnitButton
-            className={SelectUnit === 1 ? 'Unit' : 'Percent'}
-            onClick={() => SelectPercent(1)}
-          > 
-            </StyledUnitButton>
-
-          </StyledTotalProfit>
-
-          <StyledDayProfit>
-          <div style={{ fontSize: '1rem', fontWeight: 700, color: "white" }}>
-              하루 손익금 
-              <StyledLine>
-              </StyledLine> 
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="Account2">
+              <Account2 />
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="Account3">
+             <Account3/>
               </div>
-          </StyledDayProfit>
-
-        </StyledTop>
-        <StyledBottom>
-        </StyledBottom>
-      </StyledCompareProfit>
+          </SwiperSlide>
+        </StyledSwiper>
+      </StyledTop>
       
+      <StyledBottom>
+        Bottom Graph
+      </StyledBottom>
+
+      </StyledCheck>
+      </StyledScrollArea>
+    </StyledLogContainer>
   );
-}
-//const StyledPercentButton = styled.div``;
-const StyledUnitButton = styled.div``;
+};
 
-const StyledLine = styled.div``;
-
-
-const StyledCompareProfit = styled.div`
+const StyledScrollArea = styled.div`
+  overflow: scroll;
+  height: 95%;
 `;
 
-const StyledDayProfit = styled.div`
-  text-align: center;
-
-`;
-
-const StyledMoney = styled.div`
-  text-align: center;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  border-bottom: 1px solid rgb(184, 168, 142);
-  }
-`;
-
-const StyledTotalProfit = styled.div`
-  text-align: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  border-bottom: 1px solid rgb(184, 168, 142);
-  }
-  ${(props)=>{
-    if(props.className === 'Unit'){
-    }
-  }}
+const StyledLogContainer = styled.div`
+  height: 90vh;
 `;
 
 const StyledTop = styled.div`
-height: 40vh;
-border: solid 1px #b8a88e;
-border-radius: 10px;
-background-color: black;
-position: relative;
-margin: 10px
+  flex-grow : 1;
+  width: 95%;
+  border: solid 1px #b8a88e;
+  border-radius: 10px;
+  background-color: black;
+  margin: 10px auto;
+  
 `;
+
+const StyledSwiper = styled(Swiper)`
+  padding-top: 10px;
+  color: white;
+  height: 100%;
+`;
+
+const StyledCheck = styled.div``;
+
 const StyledBottom = styled.div`
-height: 40vh;
+height: 45vh;
+width: 95%;
 border: solid 1px #b8a88e;
 border-radius: 10px;
 background-color: black;
-position: relative;
-margin: 10px
+margin: 10px auto;
 `;
