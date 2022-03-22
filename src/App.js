@@ -8,6 +8,7 @@ import GoogleAuth from './pages/login/container/GoogleAuth'
 import { useSelector } from 'react-redux';
 import AiPages from './pages/AI-pages/presentation/AiPages';
 import AccountPage from './pages/Accountpage/presentational/AccountPage';
+import SettingPage from './pages/SettingPage/SettingPage';
 
 export default function App() {
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
@@ -22,7 +23,7 @@ export default function App() {
             <Route path="/second" element={<AiPages />} />
             <Route path="/third" element={<AccountPage />} />
             <Route path="/fourth" element={'Community page'} />
-            <Route path="/fifth" element={'Settings page'} />
+            <Route path="/fifth" element={<SettingPage />} />
             <Route path="*" element={'404'} />
           </>
         ) : (
