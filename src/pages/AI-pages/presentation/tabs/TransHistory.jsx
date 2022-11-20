@@ -61,7 +61,9 @@ export default function TransHistory(tradeInfo) {
         <StyledAccountSelector>
           <div className="selected" onClick={() => setSelectBoxToggle(~selectBoxToggle)}>
             <div className="selectedAccount">{arrayOfSelectBox[selectedAccount]}</div>
-            <div className="arrow" style={{marginLeft: "1em"}}>▼</div>
+            <div className="arrow" style={{ marginLeft: '1em' }}>
+              ▼
+            </div>
           </div>
           <StyledUl
             className={selectBoxToggle === -1 ? 'ul active' : 'ul'}
@@ -84,7 +86,7 @@ const StyledScrollArea = styled.div`
 `;
 
 const StyledHistoryContainer = styled.div`
-  height: 85vh;
+  height: 100%;
   margin: 0;
 `;
 
@@ -107,7 +109,7 @@ const StyledAccountSelector = styled.div`
   }
   .selectedAccount {
     max-width: 100%;
-    font-size: 18px;
+    font-size: 14px;
     overflow: hidden;
     text-overflow: ellipsis;
   }
@@ -130,7 +132,7 @@ const StyledUl = styled.ul`
   margin: 1px 0 0 -1px;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 12px;
   animation: ${selectBoxAnimation} 0.2s ease-in-out;
   z-index: 1;
 `;

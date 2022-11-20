@@ -22,15 +22,15 @@ export default function StockInfo({
     <StyledStuckInfo className="StuckInfo">
       <StyledstockName className="stockName">{stockName}</StyledstockName>
       <StyledColor style={color}>
-        <StyledCurrentPrice className="CurrentPrice">{currentPrice.toString()
-  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</StyledCurrentPrice>
+        <StyledCurrentPrice className="CurrentPrice">
+          {currentPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')}
+        </StyledCurrentPrice>
 
         <StyledFluc className="RateFluc">
           <StyledRateFluc>{stockRateChange}%</StyledRateFluc>
           <StyledPriceFluc className="">
             {tri}
-            {stockPriceChange.toString()
-  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
+            {stockPriceChange.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')}
           </StyledPriceFluc>
         </StyledFluc>
         <StyledPriceFluc className="PriceFluc"></StyledPriceFluc>
@@ -42,7 +42,7 @@ export default function StockInfo({
 const StyledStuckInfo = styled.div`
   background: black;
   color: white;
-  margin: 10px 10px;
+  margin: 0px 10px;
   border-radius: 10px;
   padding: 8px 8px 2px 8px;
 
