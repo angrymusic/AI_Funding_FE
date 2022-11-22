@@ -1,6 +1,16 @@
 # 💰 AI_Funding_FE
 
+> 해당 프로젝트는 모바일 디바이스에 최적화 되어있습니다.
+
+[모두의 투자 비서 바로가기](https://motobi.shop:6024/)
+
 AI투자 어플, '투비'의 프론트엔드 팀입니다.
+
+<div>
+<img src="https://i.imgur.com/IARYlv2.png" width="200" />
+<img src="https://i.imgur.com/0XBy6sA.png" width="200" />
+<img src="https://i.imgur.com/ZgUcGZa.png" width="200" />
+<div />
 
 ## 🧰 기술 스택
 
@@ -22,8 +32,8 @@ AI투자 어플, '투비'의 프론트엔드 팀입니다.
 | axios              | 0.25.0 | http통신을 도와주는 패키지                       |
 | fortawesome        | 0.1.16 | fontawesome 아이콘 패키지                        |
 | react-google-login | 5.2.2  | 구글 로그인 패키지                               |
-| swiper | 8.0.3  | 화면 슬라이드 구현                            |
-| chart.js | 3.7.0  | 차트 구현                            |
+| swiper             | 8.0.3  | 화면 슬라이드 구현                               |
+| chart.js           | 3.7.0  | 차트 구현                                        |
 
 ## 🌏 환경 설정
 
@@ -32,27 +42,21 @@ https://nodejs.org/en/
 
 git clone후 폴더 내에서 npm install 실행
 
-```
+```bash
 git clone https://github.com/AI-Funding/AI_Funding_FE.git
 ```
 
-```
-cd AI_Funding_FE
-```
-
-```
-npm install
+```bash
+cd AI_Funding_FE && npm install
 ```
 
 npm install시 나타나는 vulnerabilities 경고는 무시해도 됩니다.  
-(npm 관련 문제라 프로젝트에 영향 x)
+[해당 이슈에 대한 글](https://github.com/facebook/create-react-app/issues/11174)
 
 ## 🚧 리액트 설계 디자인
 
 https://velog.io/@blackb0x/리액트-디자인패턴  
 https://www.stevy.dev/react-design-guide
-
-presentational/container 패턴을 중심으로 개발
 
 ## 📝 UX/UI Writing
 
@@ -69,7 +73,7 @@ https://drive.google.com/file/d/1Ku6Q9uw2ZUwgizBf3nnj2ZyvP2nYc9QZ/view?usp=shari
 
 https://create-react-app.dev/docs/making-a-progressive-web-app/
 
-현재 프로젝트 설정은 build 버전의 경우에만 service worker가 작동하도록 되어있습니다.  
+현재 프로젝트 설정은 build 버전의 경우에만 service worker가 작동하도록 되어있습니다.
 만약 PWA테스트를 하시는 경우 build 명령어를 실행 후 build 서버를 이용해 테스트해 주시면 됩니다.
 
 ```
