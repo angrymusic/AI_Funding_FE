@@ -4,6 +4,7 @@ import IntroAi from './tabs/IntroAi';
 import CurrentStock from './tabs/CurrentStocks';
 import TransHistory from './tabs/TransHistory';
 import ErrorPage from '../../../common/ErrorPage';
+import LoadingPage from '../../../common/Loading';
 import axios from 'axios';
 
 export default function AiPages() {
@@ -11,7 +12,7 @@ export default function AiPages() {
   const [currentStock, setCurrentStock] = useState([]);
   const [tradeHistory, setTradeHistory] = useState([]);
   const [networkdError, setNetworkError] = useState(false);
-
+  const [loading, setLoading] = useState(true);
   const obj = {
     0: <IntroAi />,
     1: <CurrentStock data={currentStock} />,
@@ -30,6 +31,7 @@ export default function AiPages() {
         setCurrentStock(res.data.currentStock);
         setTradeHistory(res.data.tradeHistory);
         console.log('Get currentStocks & tradeHistory Info');
+        setLoading(false);
       })
       .catch((err) => {
         console.log('AIpage_axios_err');
@@ -38,6 +40,9 @@ export default function AiPages() {
   }, []);
   if(networkdError===true){
     return ErrorPage({msg: "인터넷 연결을 확인해주세요!"});
+  }
+  else if(loading===true){
+    return LoadingPage();
   }
   return (
     <StyledAiPages className="ai-page-container">
