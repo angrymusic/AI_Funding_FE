@@ -3,12 +3,14 @@ import { useState, useEffect } from 'react';
 import IntroAi from './tabs/IntroAi';
 import CurrentStock from './tabs/CurrentStocks';
 import TransHistory from './tabs/TransHistory';
+import ErrorPage from '../../../common/ErrorPage';
 import axios from 'axios';
 
 export default function AiPages() {
   const [SelectedTab, SelectTab] = useState(0);
   const [currentStock, setCurrentStock] = useState([]);
   const [tradeHistory, setTradeHistory] = useState([]);
+  const [networkdError, setNetworkError] = useState(false);
 
   const obj = {
     0: <IntroAi />,
@@ -31,9 +33,12 @@ export default function AiPages() {
       })
       .catch((err) => {
         console.log('AIpage_axios_err');
+        setNetworkError(true);
       });
   }, []);
-
+  if(networkdError===true){
+    return ErrorPage({msg: "인터넷 연결을 확인해주세요!"});
+  }
   return (
     <StyledAiPages className="ai-page-container">
       <StyledTabs className="tabs">
