@@ -38,11 +38,10 @@ export default function AiPages() {
         setNetworkError(true);
       });
   }, []);
-  if(networkdError===true){
-    return ErrorPage({msg: "인터넷 연결을 확인해주세요!"});
-  }
-  else if(loading===true){
-    return LoadingPage();
+  if (networkdError === true) {
+    return <ErrorPage msg="인터넷 연결을 확인해주세요!" />;
+  } else if (loading === true) {
+    return <LoadingPage />;
   }
   return (
     <StyledAiPages className="ai-page-container">
